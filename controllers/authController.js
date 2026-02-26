@@ -5,8 +5,9 @@ import bcrypt from 'bcryptjs';
 const registerController = async (req, resp) => {
     try {
         console.log(req.body)
-        const {userName, email, password, phone, address}= req.body
-        if(!userName || !email || !password || !address || !phone) {
+        //validation
+        const {userName, email, password, phone, address, answer}= req.body
+        if(!userName || !email || !password || !address || !phone || !answer) {
             return resp.status(500).send({
                 success: false,
                 message: "Please provide all fields"
@@ -24,7 +25,7 @@ const registerController = async (req, resp) => {
             var salt = bcrypt.genSaltSync(10);
             const hashedPassword = await bcrypt.hash(password, salt)
         //create new user
-        const user = await userModel.create({userName, email, password:hashedPassword, address, phone})
+        const user = await userModel.create({userName, email, password:hashedPassword, address, phone, answer})
         resp.status(201).send({
             user,
             success: true,

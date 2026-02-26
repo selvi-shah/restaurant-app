@@ -3,6 +3,9 @@ import dotenv from 'dotenv';
 import connection from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import resturantRoutes from './routes/resturantRoutes.js';
+import categoryRoutes from './routes/categoryRoutes.js';
+import foodRoutes from './routes/foodRoutes.js';
 
 const app = express();
 
@@ -29,6 +32,14 @@ app.get("/test", async (req, resp) => {
 
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/user', userRoutes);
+
+app.use('/api/v1/resturant', resturantRoutes);
+
+app.use('/api/v1/category', categoryRoutes);
+
+app.use('/api/v1/food', foodRoutes);
+
+
 
 
 //PORT
